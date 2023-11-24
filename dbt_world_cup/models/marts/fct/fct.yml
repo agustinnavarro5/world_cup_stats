@@ -1,0 +1,7 @@
+
+version: 2
+models:
+  - name: fct_world_cup_results
+    description: "FIFA World Cup results from 1930 to 2014 formatted and new columns added"
+  - name: fct_world_cup_results_per_country
+    description: "fct_world_cup_results data with granularity per country"

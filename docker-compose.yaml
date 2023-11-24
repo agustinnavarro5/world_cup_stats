@@ -1,0 +1,56 @@
+version: "3.9"
+
+services:
+    postgres:
+        image: postgres:12.14
+        ports:
+            - ${POSTGRES_EXT_PORT:-6432}:5432
+        restart: unless-stopped
+        volumes:
+            - postgres-data:/var/lib/postgresql/data
+        env_file:
+            - .env
+        environment:
+            POSTGRES_USER: world_cup
+            POSTGRES_PASSWORD: world_cup
+            POSTGRES_DB: world_cup
+        healthcheck:
+            test:
+                [
+                    "CMD",
+                    "pg_isready",
+                    "--username",
+                    "world_cup",
+                    "--dbname",
+                    "world_cup"
+                ]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+
+    waitfor-postgres:
+        image: dadarek/wait-for-dependencies:0.2
+        depends_on:
+            - postgres
+        command: postgres:5432
+
+    world_cup:
+        image: world_cup:latest
+        build:
+            dockerfile: ./Dockerfile
+            target: base
+        ports:
+            - "8002:80"
+        volumes:
+            - ./dbt_world_cup:/code/dbt_world_cup
+            - ./poetry.lock:/code/poetry.lock
+            - ./pyproject.toml:/code/pyproject.toml
+        depends_on:
+            - waitfor-postgres
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+        env_file:
+            - .env
+
+volumes:
+    postgres-data:

@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "world-cup-project"
+version = "0.1.0"
+description = ""
+authors = ["pnavarromuttdata <pablo.navarro@muttdata.ai>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+dbt-core = "1.6.5"
+dbt-postgres = "1.6.5"
+markupsafe = "2.0.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

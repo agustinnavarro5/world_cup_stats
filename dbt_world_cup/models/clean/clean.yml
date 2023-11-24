@@ -1,0 +1,5 @@
+
+version: 2
+models:
+  - name: clean_world_cup_results
+    description: "FIFA World Cup results from 1930 to 2014: deduped and formatted data"

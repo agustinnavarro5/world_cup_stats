@@ -1,0 +1,11 @@
+
+version: 2
+sources:
+- name: world_cup_sources
+  schema: public_raw
+  tables:
+  - name: world_cup_results
+
+models:
+  - name: historical_world_cup_results
+    description: "FIFA World Cup results from 1930 to 2014"
