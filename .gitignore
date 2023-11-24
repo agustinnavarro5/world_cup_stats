@@ -1,3 +1,5 @@
 .env
 .venv/
 log.txt
+./dbt_world_cup/dbt_packages/
+./dbt_world_cup/target/
